@@ -1,25 +1,26 @@
 package org.thoughtworkers.simplestock.home;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pixate.freestyle.PixateFreestyle;
 
 
 public class ShowActivity extends Activity implements View.OnClickListener {
-    private static final Intent SMS_SENT = new Intent();
-    private static final Intent SMS_DELIVERED = new Intent();
     private TextView textTotalAmount;
     private EditText textInputAmount;
+    private PendingIntent pendingIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,9 @@ public class ShowActivity extends Activity implements View.OnClickListener {
 
         textTotalAmount = (TextView) findViewById(R.id.totalAmount);
         textInputAmount = (EditText) findViewById(R.id.textAmount);
+
+        Intent alarmIntent = new Intent(this, SMSSync.class);
+        pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
     }
 
     @Override
@@ -63,21 +67,20 @@ public class ShowActivity extends Activity implements View.OnClickListener {
                 displayReceiveAmount();
                 break;
             case R.id.btnSendSms:
-                sendReceiveAmountAsSms();
+                setAlarmForSendingSms();
                 break;
             default:
                 throw new RuntimeException("Where are you clicking? - " + view.getId());
         }
     }
 
-    private void sendReceiveAmountAsSms() {
-        SmsManager smsManager = SmsManager.getDefault();
-        PendingIntent piSend = PendingIntent.getBroadcast(this, 0, new Intent(SMS_SENT), 0);
-        PendingIntent piDelivered = PendingIntent.getBroadcast(this, 0, new Intent(SMS_DELIVERED), 0);
-        smsManager.sendTextMessage("+256793330319", null, "Guess what? This is from an Android app...", piSend, piDelivered);
-    }
-
     private void displayReceiveAmount() {
         textTotalAmount.setText(textInputAmount.getEditableText());
+    }
+
+    private void setAlarmForSendingSms() {
+        AlarmManager manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        manager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 3000, pendingIntent);
+        Toast.makeText(this, "SMS Scheduled.", Toast.LENGTH_SHORT).show();
     }
 }
