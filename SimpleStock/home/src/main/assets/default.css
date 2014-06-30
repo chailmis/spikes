@@ -1,0 +1,9 @@
+#linearLayout {
+    font-size: 24px;
+}
+
+#labelForInput {
+    margin-top: 40px;
+    font-size: 24px;
+    color: red;
+}

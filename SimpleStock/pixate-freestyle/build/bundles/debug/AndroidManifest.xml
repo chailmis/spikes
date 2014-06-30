@@ -1,0 +1,5 @@
+<!-- From: file:/Users/twer/projects/SimpleStock/pixate-freestyle/AndroidManifest.xml --><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.pixate.freestyle.pixatefreestyle">
+
+    <uses-sdk android:minSdkVersion="13" android:targetSdkVersion="18"/>
+
+</manifest>

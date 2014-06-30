@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="/Users/twer/projects/SimpleStock/pixate-freestyle/res" />
+        <source path="/Users/twer/projects/SimpleStock/pixate-freestyle/build/res/rs/debug" />
+        <source path="/Users/twer/projects/SimpleStock/pixate-freestyle/build/res/generated/debug" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="/Users/twer/projects/SimpleStock/pixate-freestyle/build-types/debug/res" />
+    </dataSet>
+
+</merger>
