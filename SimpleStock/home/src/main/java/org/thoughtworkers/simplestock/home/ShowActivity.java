@@ -18,8 +18,6 @@ import com.pixate.freestyle.PixateFreestyle;
 public class ShowActivity extends Activity implements View.OnClickListener {
     private static final Intent SMS_SENT = new Intent();
     private static final Intent SMS_DELIVERED = new Intent();
-    private Button buttonConfirmReceive;
-    private Button buttonSendSms;
     private TextView textTotalAmount;
     private EditText textInputAmount;
 
@@ -31,10 +29,10 @@ public class ShowActivity extends Activity implements View.OnClickListener {
 
         setContentView(R.layout.activity_show);
 
-        buttonConfirmReceive = (Button) findViewById(R.id.buttonReceive);
+        Button buttonConfirmReceive = (Button) findViewById(R.id.buttonReceive);
         buttonConfirmReceive.setOnClickListener(this);
 
-        buttonSendSms = (Button) findViewById(R.id.btnSendSms);
+        Button buttonSendSms = (Button) findViewById(R.id.btnSendSms);
         buttonSendSms.setOnClickListener(this);
 
         textTotalAmount = (TextView) findViewById(R.id.totalAmount);
